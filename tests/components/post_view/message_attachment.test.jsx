@@ -45,10 +45,14 @@ describe('components/post_view/MessageAttachment', () => {
         const instance = wrapper.instance();
         instance.checkAttachmentTextOverflow = jest.fn();
 
-        wrapper.setState({checkOverflow: false});
-        instance.handleImageHeightReceived();
+        wrapper.setState({checkOverflow: 0});
+        instance.handleHeightReceived(1);
         expect(postListScrollChange).toHaveBeenCalledTimes(1);
-        expect(wrapper.state('checkOverflow')).toEqual(true);
+        expect(wrapper.state('checkOverflow')).toEqual(1);
+
+        instance.handleHeightReceived(0);
+        expect(postListScrollChange).toHaveBeenCalledTimes(1);
+        expect(wrapper.state('checkOverflow')).toEqual(1);
     });
 
     test('should match value on getActionView', () => {
